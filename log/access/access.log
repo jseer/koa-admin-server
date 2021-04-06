@@ -1,0 +1,4 @@
+[2021-04-05T22:03:36.909] [INFO] http - ::1 - - "GET / HTTP/1.1" 200 6 "" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
+[2021-04-05T22:03:44.899] [INFO] http - ::1 - - "GET /register HTTP/1.1" 404 9 "" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
+[2021-04-05T22:03:52.490] [INFO] http - ::1 - - "GET /register HTTP/1.1" 404 9 "" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
+[2021-04-05T22:03:56.214] [INFO] http - ::1 - - "GET /login HTTP/1.1" 404 9 "" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"

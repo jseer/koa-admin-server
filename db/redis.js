@@ -1,11 +1,8 @@
 const redis = require("redis");
+const { REDIS_CONFIG } = require('../config')
 
 module.exports = (app) => {
-  const client = redis.createClient({
-    host: '127.0.0.1',
-    port: 6379,
-    password: 123456,
-  });
+  const client = redis.createClient(REDIS_CONFIG);
 
   client.on("connect", function () {
     console.log("### redis connect");

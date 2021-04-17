@@ -10,43 +10,48 @@ const mongodb = require('./db/mongodb')
 const redis = require('./db/redis')
 const redisStore = require('koa-redis')
 const log4js = require('./config/log4js')
-const { loadController, loadServices, loadModels } = require('./util/loader')
+const validate = require('./config/validate')
+const onerror = require('koa-onerror')
 
 const app = new Koa()
 app.keys = ['some secret hurr'];
 
-/** 
- * 连接mongodb和redis
- */
 mongodb(app)
 redis(app)
 
-/** 
- * 加载controller和services
- */
- loadController(app)
- loadServices(app)
- loadModels(app)
- 
-/** 
- * 日志
- */
 log4js(app)
+validate(app)
 
 app.use(cors())
+onerror(app);
 app.use(session({
     ...config.SESSION_CONFIG,
     store: new redisStore({
         client: app.redis,
+        password: '123456'
     }),
 }, app));
 app.use(static(path.resolve(__dirname, 'public')))
 app.use(bodyparser())
 
+/** 加载插件 */
+const middlewares = [
+    ['checkLogin', {
+        ignore: function(ctx) {
+            return ['/register'].includes(ctx.path);
+        }
+    }]
+];
+// for(let [fn, opts] of middlewares) {
+//     const fnPath = path.resolve('./middlewares', fn);
+//     app.use(require(fnPath)(opts));
+// }
+
 createRouter(app)
 
 app.on('error', function (err, ctx) {
     ctx.app.errorLogger.error(err)
+    ctx.app.logger.error(err)
 })
 
 app.listen(3000, ()=> console.log('3000端口已启动'))

@@ -17,6 +17,7 @@ const articalService = {
       { status: 0 }
     )
       .populate("createUser", "name -_id")
+      .populate("contributors", "name -_id")
       .skip((pageNum - 1) * pageSize)
       .limit(pageSize);
     return { list, total };
@@ -37,9 +38,14 @@ const articalService = {
   },
 
   async update(data) {
-    const { id, content } = data;
-    await ArticalModel.findByIdAndUpdate(id, { $set: { content } });
+    const { id } = data;
+    await ArticalModel.findOneAndUpdate({_id:id}, data);
   },
+
+  async addContributor(data) {
+    const { id, contributors } = data;
+    await ArticalModel.findOneAndUpdate({_id:id}, { $set: { contributors } });
+  }
 };
 
 module.exports = articalService;

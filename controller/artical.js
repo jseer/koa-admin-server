@@ -64,6 +64,15 @@ const articalController = {
                 data: true,
             }
     },
+
+    async addContributor(ctx) {
+        const body = ctx.request.body;
+         await articalService.addContributor(body);
+            ctx.body = {
+                code: 200,
+                data: true,
+            }
+    },
 }
 
 module.exports = articalController;

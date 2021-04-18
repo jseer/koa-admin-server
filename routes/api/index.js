@@ -21,7 +21,7 @@ module.exports = (app) => {
     router.post('/artical/query', artical.query)
     router.post('/artical/delete', artical.delete)
     router.get('/artical/getDetail', artical.getDetail)
-    router.get('/artical/update', artical.update)
+    router.post('/artical/update', artical.update)
     
     app.use(router.routes())
 };
